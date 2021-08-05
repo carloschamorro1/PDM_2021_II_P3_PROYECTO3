@@ -6,5 +6,10 @@ class Constants {
         private const val URL_API_VERSION ="/v1"
         private const val URL_BASE = URL_API_BASE + URL_API_VERSION
         const val URL_BASE_EMPLEADO ="$URL_BASE/empleados"
+        const val URL_BASE_AUDIENCIA = "$URL_BASE/audiencia"
+        const val URL_BASE_CAI = "$URL_BASE/cai"
+        const val URL_BASE_CASO = "$URL_BASE/caso"
+        const val URL_BASE_CASOEMPLEADO =  "$URL_BASE/casoEmpleado"
+
     }
 }
