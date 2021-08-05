@@ -32,7 +32,7 @@ class IndicioBusiness :IIndicioBusiness {
         }catch (e:Exception){
             throw BusinessException(e.message)
         }
-        if(!opt.isEmpty){
+        if(!opt.isPresent){
             throw BusinessException("Debe ingresar un id")
         }
         if(!opt.isPresent){
