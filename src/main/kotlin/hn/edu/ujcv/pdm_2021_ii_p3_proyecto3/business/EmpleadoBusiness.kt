@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service
 import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import javax.swing.JOptionPane
 
 
 
@@ -42,7 +41,7 @@ class EmpleadoBusiness: IEmpleadoBusiness {
             throw BusinessException("Debe ingresar un id")
         }
         if(!opt.isPresent){
-            throw NotFoundException("No se encontro la persona $idEmpleado")
+            throw NotFoundException("No se encontro el empleado $idEmpleado")
         }
         return opt.get()
     }
@@ -56,6 +55,7 @@ class EmpleadoBusiness: IEmpleadoBusiness {
             validarTelefono(empleado.telefono.toString())
             validarIdentidad(empleado.dni.toString())
             validarContraseñas(empleado.contraseña)
+            validarLongitudMaxima(empleado)
            return empleadoRepository!!.save(empleado)
         }catch(e:Exception){
             throw BusinessException(e.message)
@@ -107,6 +107,13 @@ class EmpleadoBusiness: IEmpleadoBusiness {
         }
         else{
             try{
+                validarEspacios(empleado)
+                validarLongitud(empleado)
+                validarSalario(empleado.salario)
+                validarTelefono(empleado.telefono.toString())
+                validarIdentidad(empleado.dni.toString())
+                validarContraseñas(empleado.contraseña)
+                validarLongitudMaxima(empleado)
                 return empleadoRepository!!.save(empleado)
             }catch(e: java.lang.Exception){
                 throw BusinessException(e.message)
@@ -146,11 +153,11 @@ class EmpleadoBusiness: IEmpleadoBusiness {
 
     @Throws(BusinessException::class)
     fun validarLongitud(empleado: Empleado){
-        if(empleado.nombre.length < 3){
-            throw BusinessException("El nombre no puede ser menor a 3 caracteres")
+        if(empleado.nombre.length > 40 ){
+            throw BusinessException("El nombre no puede ser mayor a 40 caracteres")
         }
-        if(empleado.apellido.length < 3){
-            throw BusinessException("El apellido no puede ser menor a 3 caracteres")
+        if(empleado.apellido.length > 40){
+            throw BusinessException("El apellido no puede ser mayor a 40 caracteres")
         }
         if(empleado.dni.toString().length != 15){
             throw BusinessException("El dni no puede ser distinto a 13 dígitos")
@@ -158,17 +165,17 @@ class EmpleadoBusiness: IEmpleadoBusiness {
         if(empleado.telefono.toString().length != 8){
             throw BusinessException("El telefono no puede ser distinto a 8 dígitos")
         }
-        if(empleado.salario.toString().length < 4){
-            throw BusinessException("El salario no puede ser menor a 4 dígitos")
+        if(empleado.salario.toString().length > 10){
+            throw BusinessException("El salario no puede ser mayor a 4 dígitos")
+        }
+        if(empleado.tipoEmpleado.length > 2){
+            throw BusinessException("El tipo del empleado no puede ser mayor a 2 caracteres")
         }
 
-        if(empleado.nombreUsuario.length < 8){
-            throw BusinessException("El nombre de usuario no puede ser menor a 8 dígitos")
+        if(empleado.nombreUsuario.length > 25){
+            throw BusinessException("El nombre de usuario no puede ser mayor a 25 dígitos")
         }
 
-        if(empleado.contraseña.length < 8){
-            throw BusinessException("La contraseña no puede ser menor a 8 dígitos")
-        }
     }
 
     @Throws(BusinessException::class)
@@ -234,6 +241,33 @@ class EmpleadoBusiness: IEmpleadoBusiness {
             }
         }
         return false
+    }
+
+    @Throws(BusinessException::class)
+    fun validarLongitudMaxima(empleado: Empleado){
+        if(empleado.nombre.length < 3){
+            throw BusinessException("El nombre no puede ser menor a 3 caracteres")
+        }
+        if(empleado.apellido.length < 3){
+            throw BusinessException("El apellido no puede ser menor a 3 caracteres")
+        }
+        if(empleado.dni.toString().length != 15){
+            throw BusinessException("El dni no puede ser distinto a 13 dígitos")
+        }
+        if(empleado.telefono.toString().length != 8){
+            throw BusinessException("El telefono no puede ser distinto a 8 dígitos")
+        }
+        if(empleado.salario.toString().length < 4){
+            throw BusinessException("El salario no puede ser menor a 4 dígitos")
+        }
+
+        if(empleado.nombreUsuario.length < 8){
+            throw BusinessException("El nombre de usuario no puede ser menor a 8 dígitos")
+        }
+
+        if(empleado.contraseña.length < 8){
+            throw BusinessException("La contraseña no puede ser menor a 8 dígitos")
+        }
     }
 
 }

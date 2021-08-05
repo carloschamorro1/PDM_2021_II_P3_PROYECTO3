@@ -46,7 +46,7 @@ class EmpleadoRestController {
         }
     }
 
-    @GetMapping("/addEmpleado")
+    @PostMapping("/addEmpleado")
     fun insert(@RequestBody empleado: Empleado):ResponseEntity<Any>{
         return try{
             empleadoBusiness!!.saveEmpleado(empleado)
@@ -59,7 +59,7 @@ class EmpleadoRestController {
         }
     }
 
-    @GetMapping("")
+    @PutMapping("")
     fun update(@RequestBody empleado: Empleado):ResponseEntity<Any>{
         return try{
             empleadoBusiness!!.updateEmpleado(empleado)

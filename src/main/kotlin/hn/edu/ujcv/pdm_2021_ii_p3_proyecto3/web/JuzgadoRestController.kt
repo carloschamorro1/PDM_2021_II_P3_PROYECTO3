@@ -49,7 +49,7 @@ class JuzgadoRestController {
         }
     }
 
-    @GetMapping("/addJuzgado")
+    @PostMapping("/addJuzgado")
     fun insert(@RequestBody juzgado: Juzgado): ResponseEntity<Any> {
         return try{
             JuzgadoBusiness!!.saveJuzgado(juzgado)
@@ -62,7 +62,7 @@ class JuzgadoRestController {
         }
     }
 
-    @GetMapping("")
+    @PutMapping("")
     fun update(@RequestBody juzgado: Juzgado): ResponseEntity<Any> {
         return try{
             JuzgadoBusiness!!.updateJuzgado(juzgado)

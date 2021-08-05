@@ -50,7 +50,7 @@ class IndicioRestController {
         }
     }
 
-    @GetMapping("/addIndicio")
+    @PostMapping("/addIndicio")
     fun insert(@RequestBody indicio: Indicio): ResponseEntity<Any> {
         return try{
             IndicioBusiness!!.saveIndicio(indicio)
@@ -63,7 +63,7 @@ class IndicioRestController {
         }
     }
 
-    @GetMapping("")
+    @PutMapping("")
     fun update(@RequestBody indicio: Indicio): ResponseEntity<Any> {
         return try{
             IndicioBusiness!!.updateIndicio(indicio)
