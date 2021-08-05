@@ -39,6 +39,7 @@ class AudienciaBusiness: IAudienciaBusiness {
         }
         return opt.get()
     }
+
     @Throws(BusinessException::class)
     override fun saveAudiencia(audiencia: Audiencia): Audiencia {
         try{
@@ -72,9 +73,7 @@ class AudienciaBusiness: IAudienciaBusiness {
         }
     }
 
-
-
-    override fun getAudienciaByidCaso(idCaso: String): Audiencia {
+    override fun getAudienciaByidCaso(idCaso: Long): Audiencia {
         val opt: Optional<Audiencia>
         try{
             opt = audienciaRepository!!.findByidCaso(idCaso)
@@ -86,6 +85,7 @@ class AudienciaBusiness: IAudienciaBusiness {
         }
         return opt.get()
     }
+
     override fun updateAudiencia(audiencia: Audiencia): Audiencia {
         val opt: Optional<Audiencia>
         try{

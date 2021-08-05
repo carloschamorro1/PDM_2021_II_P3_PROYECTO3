@@ -34,7 +34,7 @@ class AudienciaRestController {
         }
     }
     @GetMapping("/idcaso/{idcaso}")
-    fun loadByNombre(@PathVariable("idcaso") idcaso:String):ResponseEntity<Audiencia>{
+    fun loadByNombre(@PathVariable("idcaso") idcaso:Long):ResponseEntity<Audiencia>{
         return try{
             ResponseEntity(audienciaBusiness!!.getAudienciaByidCaso(idcaso),HttpStatus.OK)
         }catch (e:BusinessException){

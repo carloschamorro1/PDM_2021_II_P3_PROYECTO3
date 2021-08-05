@@ -8,6 +8,6 @@ interface IAudienciaBusiness {
     fun getAudienciaById(id:Long): Audiencia
     fun saveAudiencia(audiencia: Audiencia): Audiencia
     fun removeAudiencia(idCaso:Long)
-    fun getAudienciaByidCaso(idCaso: String): Audiencia
+    fun getAudienciaByidCaso(idCaso: Long): Audiencia
     fun updateAudiencia(audiencia: Audiencia): Audiencia
 }

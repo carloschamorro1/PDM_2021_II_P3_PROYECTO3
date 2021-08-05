@@ -4,7 +4,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name="Indicio")
-data class Indicio(val idcaso:Long=0, val descripcion:String="") {
+data class Indicio(val idCaso:Long=0, val descripcion:String="") {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long=0

@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 interface ServicioRepository : JpaRepository<Servicio, Long> {
-        fun findByNombre(nombreServicio:String): Optional<Juzgado>
+        fun findByNombre(nombreServicio:String): Optional<Servicio>
     }

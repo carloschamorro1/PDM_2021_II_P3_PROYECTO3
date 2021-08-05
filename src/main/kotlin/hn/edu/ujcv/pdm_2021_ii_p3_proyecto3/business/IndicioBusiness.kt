@@ -3,7 +3,6 @@ package hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.business
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.dao.IndicioRepository
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.exceptions.BusinessException
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.exceptions.NotFoundException
-import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Empleado
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Indicio
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -11,10 +10,8 @@ import java.util.*
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-
 @Service
-class IndicioBusiness:IIndicioBusiness {
-
+class IndicioBusiness :IIndicioBusiness {
     @Autowired
     val indicioRepository: IndicioRepository?=null
 
@@ -107,22 +104,17 @@ class IndicioBusiness:IIndicioBusiness {
         return opt.get()
     }
 
-
-}
-
-
-    ///VALIDACIONES
     fun validarEspacios(indicio: Indicio){
-        if(indicio.idcaso.toString().isEmpty()){
+        if(indicio.idCaso.toString().isEmpty()){
             throw BusinessException("El idCaso no puede ir vacio")
         }
 
-        }
+    }
 
 
     @Throws(BusinessException::class)
     fun validarLongitud(indicio: Indicio){
-        if(indicio.idcaso.toString().length < 1){
+        if(indicio.idCaso.toString().length < 1){
             throw BusinessException("El idCaso no puede ser menor a 1 caracteres")
         }
         if(indicio.descripcion.length < 6){
@@ -195,5 +187,4 @@ class IndicioBusiness:IIndicioBusiness {
         }
         return false
     }
-
-
+}

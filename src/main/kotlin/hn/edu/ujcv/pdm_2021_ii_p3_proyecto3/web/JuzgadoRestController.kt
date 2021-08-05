@@ -1,10 +1,7 @@
 package hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.web
 
-import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.business.IIndicioBusiness
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.business.IJuzgadoBusiness
-import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.business.JuzgadoBusiness
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.exceptions.BusinessException
-import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Indicio
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Juzgado
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.utils.Constants
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.utils.RestApiError
