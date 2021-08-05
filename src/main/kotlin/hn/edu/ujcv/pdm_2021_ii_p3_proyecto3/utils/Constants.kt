@@ -9,5 +9,10 @@ class Constants {
         const val URL_BASE_INDICIO ="$URL_BASE/indicio"
         const val URL_BASE_JUZGADO ="$URL_BASE/juzgado"
         const val URL_BASE_SERVICIO ="$URL_BASE/servicio"
+        const val URL_BASE_AUDIENCIA = "$URL_BASE/audiencia"
+        const val URL_BASE_CAI = "$URL_BASE/cai"
+        const val URL_BASE_CASO = "$URL_BASE/caso"
+        const val URL_BASE_CASOEMPLEADO =  "$URL_BASE/casoEmpleado"
+
     }
 }
