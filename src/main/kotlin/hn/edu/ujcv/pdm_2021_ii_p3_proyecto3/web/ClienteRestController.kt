@@ -3,7 +3,6 @@ package hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.web
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.business.IClienteBusiness
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.exceptions.BusinessException
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Cliente
-import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Empleado
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.utils.Constants
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.utils.RestApiError
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,6 +17,7 @@ class ClienteRestController {
     @Autowired
     val clienteBusiness: IClienteBusiness? = null
 
+    @GetMapping("")
     fun list():ResponseEntity<List<Cliente>>{
         return try{
             ResponseEntity(clienteBusiness!!.getCliente(), HttpStatus.OK)
@@ -55,7 +55,7 @@ class ClienteRestController {
         return try{
             clienteBusiness!!.saveCliente(cliente)
             val responseHeader = HttpHeaders ()
-            responseHeader.set("location",Constants.URL_BASE_CLIENTE+"/"+cliente.id)
+            responseHeader.set("location",Constants.URL_BASE_CLIENTE+"/"+cliente.idCliente)
             ResponseEntity(cliente,responseHeader,HttpStatus.CREATED)
         }catch (e:BusinessException){
             val apiError = RestApiError(HttpStatus.INTERNAL_SERVER_ERROR, "Informacion enviada no es valida",e.message.toString())

@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 
 interface ClienteRepository: JpaRepository<Cliente,Long> {
-    fun findByNombre(nombreCliente:String): Optional<Cliente>
+    fun findByNombreCliente(nombreCliente:String): Optional<Cliente>
 }

@@ -51,10 +51,10 @@ class EmpleadoBusiness: IEmpleadoBusiness {
         try{
             validarEspacios(empleado)
             validarLongitud(empleado)
-            validarSalario(empleado.salario)
-            validarTelefono(empleado.telefono.toString())
-            validarIdentidad(empleado.dni.toString())
-            validarContraseñas(empleado.contraseña)
+            validarSalario(empleado.salarioEmpleado)
+            validarTelefono(empleado.telefonoEmpleado.toString())
+            validarIdentidad(empleado.dniEmpleado.toString())
+            validarContraseñas(empleado.contraseñaEmpleado)
             validarLongitudMaxima(empleado)
            return empleadoRepository!!.save(empleado)
         }catch(e:Exception){
@@ -85,7 +85,7 @@ class EmpleadoBusiness: IEmpleadoBusiness {
     override fun getEmpleadoByNombre(nombreEmpleado: String): Empleado {
         val opt: Optional<Empleado>
         try{
-            opt = empleadoRepository!!.findByNombre(nombreEmpleado)
+            opt = empleadoRepository!!.findByNombreEmpleado(nombreEmpleado)
         }catch (e:Exception){
             throw BusinessException(e.message)
         }
@@ -98,21 +98,21 @@ class EmpleadoBusiness: IEmpleadoBusiness {
     override fun updateEmpleado(empleado: Empleado): Empleado {
         val opt: Optional<Empleado>
         try{
-            opt = empleadoRepository!!.findById(empleado.id)
+            opt = empleadoRepository!!.findById(empleado.idEmpleado)
         }catch (e: Exception){
             throw BusinessException(e.message)
         }
         if(!opt.isPresent){
-            throw NotFoundException("No se encontro el empleado ${empleado.id}")
+            throw NotFoundException("No se encontro el empleado ${empleado.idEmpleado}")
         }
         else{
             try{
                 validarEspacios(empleado)
                 validarLongitud(empleado)
-                validarSalario(empleado.salario)
-                validarTelefono(empleado.telefono.toString())
-                validarIdentidad(empleado.dni.toString())
-                validarContraseñas(empleado.contraseña)
+                validarSalario(empleado.salarioEmpleado)
+                validarTelefono(empleado.telefonoEmpleado.toString())
+                validarIdentidad(empleado.dniEmpleado.toString())
+                validarContraseñas(empleado.contraseñaEmpleado)
                 validarLongitudMaxima(empleado)
                 return empleadoRepository!!.save(empleado)
             }catch(e: java.lang.Exception){
@@ -125,19 +125,19 @@ class EmpleadoBusiness: IEmpleadoBusiness {
     // Comienzan las validaciones
     @Throws(BusinessException::class)
     fun validarEspacios(empleado: Empleado){
-        if(empleado.nombre.isEmpty()){
+        if(empleado.nombreEmpleado.isEmpty()){
             throw BusinessException("El nombre no debe estar vacío")
         }
-        if(empleado.apellido.isEmpty()){
+        if(empleado.apellidoEmpleado.isEmpty()){
             throw BusinessException("El apellido no debe estar vacío")
         }
-        if(empleado.dni.toString().isEmpty()){
+        if(empleado.dniEmpleado.toString().isEmpty()){
             throw BusinessException("El dni no debe estar vacío")
         }
-        if(empleado.telefono.toString().isEmpty()){
+        if(empleado.telefonoEmpleado.toString().isEmpty()){
             throw BusinessException("El telefono no debe estar vacío")
         }
-        if(empleado.salario.toString().isEmpty()){
+        if(empleado.salarioEmpleado.toString().isEmpty()){
             throw BusinessException("El salario no debe estar vacío")
         }
         if(empleado.tipoEmpleado.isEmpty()){
@@ -146,26 +146,26 @@ class EmpleadoBusiness: IEmpleadoBusiness {
         if(empleado.nombreUsuario.isEmpty()){
             throw BusinessException("El nombre de usuario no debe estar vacío")
         }
-        if(empleado.contraseña.isEmpty()){
+        if(empleado.contraseñaEmpleado.isEmpty()){
             throw BusinessException("La contraseña no debe estar vacía")
         }
     }
 
     @Throws(BusinessException::class)
     fun validarLongitud(empleado: Empleado){
-        if(empleado.nombre.length > 40 ){
+        if(empleado.nombreEmpleado.length > 40 ){
             throw BusinessException("El nombre no puede ser mayor a 40 caracteres")
         }
-        if(empleado.apellido.length > 40){
+        if(empleado.apellidoEmpleado.length > 40){
             throw BusinessException("El apellido no puede ser mayor a 40 caracteres")
         }
-        if(empleado.dni.toString().length != 15){
+        if(empleado.dniEmpleado.toString().length != 15){
             throw BusinessException("El dni no puede ser distinto a 13 dígitos")
         }
-        if(empleado.telefono.toString().length != 8){
+        if(empleado.telefonoEmpleado.toString().length != 8){
             throw BusinessException("El telefono no puede ser distinto a 8 dígitos")
         }
-        if(empleado.salario.toString().length > 10){
+        if(empleado.salarioEmpleado.toString().length > 10){
             throw BusinessException("El salario no puede ser mayor a 4 dígitos")
         }
         if(empleado.tipoEmpleado.length > 2){
@@ -245,19 +245,19 @@ class EmpleadoBusiness: IEmpleadoBusiness {
 
     @Throws(BusinessException::class)
     fun validarLongitudMaxima(empleado: Empleado){
-        if(empleado.nombre.length < 3){
+        if(empleado.nombreEmpleado.length < 3){
             throw BusinessException("El nombre no puede ser menor a 3 caracteres")
         }
-        if(empleado.apellido.length < 3){
+        if(empleado.apellidoEmpleado.length < 3){
             throw BusinessException("El apellido no puede ser menor a 3 caracteres")
         }
-        if(empleado.dni.toString().length != 15){
+        if(empleado.dniEmpleado.toString().length != 15){
             throw BusinessException("El dni no puede ser distinto a 13 dígitos")
         }
-        if(empleado.telefono.toString().length != 8){
+        if(empleado.telefonoEmpleado.toString().length != 8){
             throw BusinessException("El telefono no puede ser distinto a 8 dígitos")
         }
-        if(empleado.salario.toString().length < 4){
+        if(empleado.salarioEmpleado.toString().length < 4){
             throw BusinessException("El salario no puede ser menor a 4 dígitos")
         }
 
@@ -265,7 +265,7 @@ class EmpleadoBusiness: IEmpleadoBusiness {
             throw BusinessException("El nombre de usuario no puede ser menor a 8 dígitos")
         }
 
-        if(empleado.contraseña.length < 8){
+        if(empleado.contraseñaEmpleado.length < 8){
             throw BusinessException("La contraseña no puede ser menor a 8 dígitos")
         }
     }

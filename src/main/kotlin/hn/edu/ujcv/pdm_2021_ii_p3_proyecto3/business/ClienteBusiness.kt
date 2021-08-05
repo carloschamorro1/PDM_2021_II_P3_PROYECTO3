@@ -4,7 +4,6 @@ import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.dao.ClienteRepository
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.exceptions.BusinessException
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.exceptions.NotFoundException
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Cliente
-import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Empleado
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
@@ -17,7 +16,7 @@ class ClienteBusiness:IClienteBusiness {
     @Autowired
     val clienteRepository: ClienteRepository?=null
 
-
+    @Throws(BusinessException::class)
     override fun getCliente(): List<Cliente> {
         try{
             return clienteRepository!!.findAll()
@@ -42,13 +41,13 @@ class ClienteBusiness:IClienteBusiness {
         }
         return opt.get()
     }
-
+    @Throws(BusinessException::class)
     override fun saveCliente(cliente: Cliente): Cliente {
         try{
             validarEspacios(cliente)
             validarLongitud(cliente)
-            validarTelefono(cliente.telefono)
-            validarIdentidad(cliente.dni)
+            validarTelefono(cliente.telefonoCliente)
+            validarIdentidad(cliente.dniCliente)
             validarLongitudMaxima(cliente)
             return clienteRepository!!.save(cliente)
         }catch (e:Exception){
@@ -76,11 +75,11 @@ class ClienteBusiness:IClienteBusiness {
         }
 
     }
-
+    @Throws(BusinessException::class, NotFoundException::class)
     override fun getClienteByNombre(nombreCliente: String): Cliente {
         val opt: Optional<Cliente>
         try{
-            opt = clienteRepository!!.findByNombre(nombreCliente)
+            opt = clienteRepository!!.findByNombreCliente(nombreCliente)
         }catch (e:Exception){
             throw BusinessException(e.message)
         }
@@ -89,23 +88,23 @@ class ClienteBusiness:IClienteBusiness {
         }
         return opt.get()
     }
-
+    @Throws(BusinessException::class, NotFoundException::class)
     override fun updateCliente(cliente: Cliente): Cliente {
         val opt: Optional<Cliente>
         try{
-            opt = clienteRepository!!.findById(cliente.id)
+            opt = clienteRepository!!.findById(cliente.idCliente)
         }catch (e: Exception){
             throw BusinessException(e.message)
         }
         if(!opt.isPresent){
-            throw NotFoundException("No se encontro el cliente ${cliente.id}")
+            throw NotFoundException("No se encontro el cliente ${cliente.idCliente}")
         }
         else{
             try{
                 validarEspacios(cliente)
                 validarLongitud(cliente)
-                validarTelefono(cliente.telefono)
-                validarIdentidad(cliente.dni)
+                validarTelefono(cliente.telefonoCliente)
+                validarIdentidad(cliente.dniCliente)
                 validarLongitudMaxima(cliente)
                 return clienteRepository!!.save(cliente)
             }catch(e: java.lang.Exception){
@@ -119,22 +118,22 @@ class ClienteBusiness:IClienteBusiness {
     // Comienzan las validaciones
     @Throws(BusinessException::class)
     fun validarEspacios(cliente: Cliente){
-        if(cliente.nombre.isEmpty()){
+        if(cliente.nombreCliente.isEmpty()){
             throw BusinessException("El nombre no debe estar vacío")
         }
-        if(cliente.apellido.isEmpty()){
+        if(cliente.apellidoCliente.isEmpty()){
             throw BusinessException("El apellido no debe estar vacío")
         }
-        if(cliente.dni.isEmpty()){
+        if(cliente.dniCliente.isEmpty()){
             throw BusinessException("El dni no debe estar vacío")
         }
-        if(cliente.telefono.isEmpty()){
+        if(cliente.telefonoCliente.isEmpty()){
             throw BusinessException("El telefono no debe estar vacío")
         }
-        if(cliente.rtn.isEmpty()){
+        if(cliente.rtnCliente.isEmpty()){
             throw BusinessException("El rtn no debe estar vacío")
         }
-        if(cliente.direccion.isEmpty()){
+        if(cliente.direccionCliente.isEmpty()){
             throw BusinessException("La direccion del cliente no debe estar vacía")
         }
     }
@@ -170,46 +169,46 @@ class ClienteBusiness:IClienteBusiness {
 
     @Throws(BusinessException::class)
     fun validarLongitud(cliente: Cliente){
-        if(cliente.nombre.length < 3){
+        if(cliente.nombreCliente.length < 3){
             throw BusinessException("El nombre no puede ser menor a 3 caracteres")
         }
-        if(cliente.apellido.length < 3){
+        if(cliente.apellidoCliente.length < 3){
             throw BusinessException("El apellido no puede ser menor a 3 caracteres")
         }
-        if(cliente.dni.length != 15){
+        if(cliente.dniCliente.length != 15){
             throw BusinessException("El dni no puede ser distinto a 13 dígitos")
         }
-        if(cliente.telefono.length != 8){
+        if(cliente.telefonoCliente.length != 8){
             throw BusinessException("El telefono no puede ser distinto a 8 dígitos")
         }
-        if(cliente.rtn.length != 14){
+        if(cliente.rtnCliente.length != 14){
             throw BusinessException("El rtn no puede ser distinto a 14 dígitos")
         }
 
-        if(cliente.direccion.length < 8){
+        if(cliente.direccionCliente.length < 8){
             throw BusinessException("La direccion no puede ser menor a 8 caracteres")
         }
     }
 
     @Throws(BusinessException::class)
     fun validarLongitudMaxima(cliente: Cliente){
-        if(cliente.nombre.length > 40){
+        if(cliente.nombreCliente.length > 40){
             throw BusinessException("El nombre no puede ser mayor a 40 caracteres")
         }
-        if(cliente.apellido.length > 40){
+        if(cliente.apellidoCliente.length > 40){
             throw BusinessException("El apellido no puede ser mayor a 40 caracteres")
         }
-        if(cliente.dni.length != 15){
+        if(cliente.dniCliente.length != 15){
             throw BusinessException("El dni no puede ser distinto a 13 dígitos")
         }
-        if(cliente.telefono.length != 8){
+        if(cliente.telefonoCliente.length != 8){
             throw BusinessException("El telefono no puede ser distinto a 8 dígitos")
         }
-        if(cliente.rtn.length != 14){
+        if(cliente.rtnCliente.length != 14){
             throw BusinessException("El rtn no puede ser distinto a 14 dígitos")
         }
 
-        if(cliente.direccion.length > 30){
+        if(cliente.direccionCliente.length > 30){
             throw BusinessException("La direccion no puede ser mayor a 30 caracteres")
         }
     }

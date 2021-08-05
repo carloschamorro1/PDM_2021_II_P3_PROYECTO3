@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*
 class ServicioRestController {
     @Autowired
     val ServicioBusiness: IServicioBusiness? = null
+
+    @GetMapping("")
     fun list(): ResponseEntity<List<Servicio>> {
         return try{
             ResponseEntity(ServicioBusiness!!.getServicio(), HttpStatus.OK)

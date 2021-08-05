@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*
 class EmpleadoRestController {
     @Autowired
     val empleadoBusiness:IEmpleadoBusiness? = null
+
+    @GetMapping("")
     fun list(): ResponseEntity<List<Empleado>> {
         return try{
             ResponseEntity(empleadoBusiness!!.getEmpleado(), HttpStatus.OK)
@@ -51,7 +53,7 @@ class EmpleadoRestController {
         return try{
             empleadoBusiness!!.saveEmpleado(empleado)
             val responseHeader = HttpHeaders ()
-            responseHeader.set("location",Constants.URL_BASE_EMPLEADO+"/"+empleado.id)
+            responseHeader.set("location",Constants.URL_BASE_EMPLEADO+"/"+empleado.idEmpleado)
             ResponseEntity(empleado,responseHeader,HttpStatus.CREATED)
         }catch (e:BusinessException){
             val apiError = RestApiError(HttpStatus.INTERNAL_SERVER_ERROR, "Informacion enviada no es valida",e.message.toString())
