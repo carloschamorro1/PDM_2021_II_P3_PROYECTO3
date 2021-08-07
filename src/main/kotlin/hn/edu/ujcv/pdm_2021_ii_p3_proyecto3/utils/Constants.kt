@@ -16,5 +16,6 @@ class Constants {
         const val URL_BASE_CLIENTE = "$URL_BASE/cliente"
         const val URL_BASE_EXPEDIENTE = "$URL_BASE/expediente"
         const val URL_BASE_FACTURAENCABEZADO = "$URL_BASE/facturaEncabezado"
+        const val URL_BASE_FACTURADETALLE = "$URL_BASE/facturaDetalle"
     }
 }
