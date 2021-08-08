@@ -65,7 +65,7 @@ class CobroRestController {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
-
+//m
     @DeleteMapping("/delete/{id}")
     fun delete(@PathVariable("id")idFactura:Long):ResponseEntity<Any>{
         return try{

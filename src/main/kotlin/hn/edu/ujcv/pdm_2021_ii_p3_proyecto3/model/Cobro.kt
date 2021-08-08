@@ -2,7 +2,7 @@ package hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model
 import java.util.*
 import javax.persistence.*
 
-@Entity
+@Entity//m
 @Table(name="Cobro", catalog = "dbo")
 class Cobro (val fechaEmisionFactura: Date, val idCAI:Long=0, val idSucursal:Long=0, val totalFactura:Float= 0F,
              val idEmpleado:Long=0, val idCaso:Long=0, val idDetalle:Long=0, val idServicio:Long=0, val cantidadFactura:Long=0){

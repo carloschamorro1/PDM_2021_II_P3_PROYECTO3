@@ -9,4 +9,4 @@ interface ICobroBusiness {
     fun saveCobro(cobro: Cobro): Cobro
     fun removeCobro(idFactura:Long)
     fun updateCobro(cobro: Cobro): Cobro
-}
+}//marce

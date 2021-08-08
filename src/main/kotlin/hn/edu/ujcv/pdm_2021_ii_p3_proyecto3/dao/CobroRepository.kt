@@ -7,4 +7,4 @@ import java.util.*
 
 interface CobroRepository : JpaRepository<Cobro, Long> {
     fun findByIdFactura(idFactura:Long): Optional<Cobro>
-}
+}//mar

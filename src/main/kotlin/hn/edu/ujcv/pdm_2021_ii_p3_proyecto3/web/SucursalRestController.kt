@@ -76,7 +76,7 @@ class SucursalRestController {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
-
+//
     @DeleteMapping("/delete/{id}")
     fun delete(@PathVariable("id")idSucursal:Long):ResponseEntity<Any>{
         return try{

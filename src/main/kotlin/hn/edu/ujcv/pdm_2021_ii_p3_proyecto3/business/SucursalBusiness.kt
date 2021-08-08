@@ -25,7 +25,7 @@ class SucursalBusiness: ISucursalBusiness {
         }
     }
 
-
+//marce
 
     @Throws(BusinessException::class, NotFoundException::class)
     override fun getSucursalById(idSucursal: Long): Sucursal {

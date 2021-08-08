@@ -11,3 +11,4 @@ interface ISucursalBusiness {
     fun getSucursalByNombre(nombreSucursal: String): Sucursal
     fun updateSucursal(sucursal: Sucursal): Sucursal
 }
+//marce
