@@ -89,12 +89,12 @@ class AudienciaBusiness: IAudienciaBusiness {
     override fun updateAudiencia(audiencia: Audiencia): Audiencia {
         val opt: Optional<Audiencia>
         try{
-            opt = audienciaRepository!!.findByidCaso(audiencia.id)
+            opt = audienciaRepository!!.findByidCaso(audiencia.idFechaAudiencia)
         }catch (e: Exception){
             throw BusinessException(e.message)
         }
         if(!opt.isPresent){
-            throw NotFoundException("No se encontro la audiencia ${audiencia.id}")
+            throw NotFoundException("No se encontro la audiencia ${audiencia.idFechaAudiencia}")
         }
         else{
             try{

@@ -1,8 +1,8 @@
 package hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.web
 
-import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.business.IAudienciaBusiness
+import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.business.IFacturaDetalleBusiness
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.exceptions.BusinessException
-import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.Audiencia
+import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.model.FacturaDetalle
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.utils.Constants
 import hn.edu.ujcv.pdm_2021_ii_p3_proyecto3.utils.RestApiError
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,68 +10,51 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+
 @RestController
-@RequestMapping(Constants.URL_BASE_AUDIENCIA)
-class AudienciaRestController {
+@RequestMapping(Constants.URL_BASE_FACTURADETALLE)
+class FacturaDetalleRestController {
     @Autowired
-    val audienciaBusiness: IAudienciaBusiness? = null
-    fun list(): ResponseEntity<List<Audiencia>> {
+    val facturaDetalleBusiness: IFacturaDetalleBusiness?= null
+
+    @GetMapping("")
+    fun list(): ResponseEntity<List<FacturaDetalle>> {
         return try{
-            ResponseEntity(audienciaBusiness!!.getAudiencia(), HttpStatus.OK)
+            ResponseEntity(facturaDetalleBusiness!!.getFacturaDetalle(), HttpStatus.OK)
         }catch (e:Exception){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
+
     @GetMapping("/id/{id}")
-    fun loadById(@PathVariable("id") idFechaAudiencia:Long):ResponseEntity<Audiencia>{
+    fun loadById(@PathVariable("id") idDetalle:Long):ResponseEntity<FacturaDetalle>{
         return try{
-            ResponseEntity(audienciaBusiness!!.getAudienciaById(idFechaAudiencia),HttpStatus.OK)
+            ResponseEntity(facturaDetalleBusiness!!.getFacturaDetalleById(idDetalle),HttpStatus.OK)
         }catch (e: BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
         }
-        catch (e:BusinessException){
+        catch (e: BusinessException){
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
-    @GetMapping("/idcaso/{idcaso}")
-    fun loadByNombre(@PathVariable("idcaso") idcaso:Long):ResponseEntity<Audiencia>{
+
+    @PostMapping("/addFacturaDetalle")
+    fun insert(@RequestBody facturaDetalle: FacturaDetalle):ResponseEntity<Any>{
         return try{
-            ResponseEntity(audienciaBusiness!!.getAudienciaByidCaso(idcaso),HttpStatus.OK)
-        }catch (e:BusinessException){
-            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
-        }
-        catch (e:BusinessException){
-            ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-    @PostMapping("/addAudiencia")
-    fun insert(@RequestBody audiencia: Audiencia):ResponseEntity<Any>{
-        return try{
-            audienciaBusiness!!.saveAudiencia(audiencia)
+            facturaDetalleBusiness!!.saveFacturaDetalle(facturaDetalle)
             val responseHeader = HttpHeaders ()
-            responseHeader.set("location",Constants.URL_BASE_AUDIENCIA+"/"+audiencia.idFechaAudiencia)
-            ResponseEntity(audiencia,responseHeader,HttpStatus.CREATED)
+            responseHeader.set("location",Constants.URL_BASE_FACTURADETALLE+"/"+facturaDetalle.idDetalle)
+            ResponseEntity(facturaDetalle,responseHeader,HttpStatus.CREATED)
         }catch (e:BusinessException){
             val apiError = RestApiError(HttpStatus.INTERNAL_SERVER_ERROR, "Informacion enviada no es valida",e.message.toString())
             ResponseEntity(apiError,HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
+
     @PutMapping("")
-    fun update(@RequestBody audiencia: Audiencia):ResponseEntity<Any>{
+    fun update(@RequestBody facturaDetalle: FacturaDetalle):ResponseEntity<Any>{
         return try{
-            audienciaBusiness!!.updateAudiencia(audiencia)
-            ResponseEntity(HttpStatus.OK)
-        }catch (e:BusinessException){
-            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
-        }
-        catch (e:BusinessException){
-            ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-    @DeleteMapping("/delete/{id}")
-    fun delete(@PathVariable("id")idCaso:Long):ResponseEntity<Any>{
-        return try{
-            audienciaBusiness!!.removeAudiencia(idCaso)
+            facturaDetalleBusiness!!.updateFacturaDetalle(facturaDetalle)
             ResponseEntity(HttpStatus.OK)
         }catch (e:BusinessException){
             ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -81,5 +64,17 @@ class AudienciaRestController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    fun delete(@PathVariable("id")idDetalle:Long):ResponseEntity<Any>{
+        return try{
+            facturaDetalleBusiness!!.removeFacturaDetalle(idDetalle)
+            ResponseEntity(HttpStatus.OK)
+        }catch (e:BusinessException){
+            ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        catch (e:BusinessException){
+            ResponseEntity(HttpStatus.NOT_FOUND)
+        }
+    }
 
 }

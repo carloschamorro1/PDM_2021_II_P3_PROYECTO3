@@ -3,11 +3,11 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name="Audiencia", catalog = "dbo")
-data class Audiencia(val idFechaAudiencia:Long = 0 , val FechaAudiencia:Date,
+@Table(name="AudienciaDetalle", catalog = "dbo")
+data class Audiencia(val idCaso:Long= 0 , val FechaAudiencia:Date,
                      val idJuzgado:Long = 0, val descripcionAudiencia:String= ""){
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var idCaso:Long=0
+    var idFechaAudiencia:Long=0
 }
 

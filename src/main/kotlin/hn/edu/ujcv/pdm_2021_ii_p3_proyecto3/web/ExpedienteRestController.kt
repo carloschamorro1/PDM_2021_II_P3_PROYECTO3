@@ -32,7 +32,7 @@ class ExpedienteRestController {
         return try{
             expedienteBusiness!!.saveExpediente(expediente)
             val responseHeader = HttpHeaders ()
-            responseHeader.set("location",Constants.URL_BASE_CLIENTE+"/"+expediente.idExpediente)
+            responseHeader.set("location",Constants.URL_BASE_EXPEDIENTE+"/"+expediente.idExpediente)
             ResponseEntity(expediente,responseHeader,HttpStatus.CREATED)
         }catch (e:BusinessException){
             val apiError = RestApiError(HttpStatus.INTERNAL_SERVER_ERROR, "Informacion enviada no es valida",e.message.toString())
