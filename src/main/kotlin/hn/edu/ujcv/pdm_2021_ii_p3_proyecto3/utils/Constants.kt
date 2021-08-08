@@ -15,5 +15,7 @@ class Constants {
         const val URL_BASE_CASOEMPLEADO =  "$URL_BASE/casoEmpleado"
         const val URL_BASE_CLIENTE = "$URL_BASE/cliente"
         const val URL_BASE_EXPEDIENTE = "$URL_BASE/expediente"
+        const val URL_BASE_COBRO = "$URL_BASE/cobro"
+        const val URL_BASE_SUCURSAL = "$URL_BASE/sucursal"
     }
 }
