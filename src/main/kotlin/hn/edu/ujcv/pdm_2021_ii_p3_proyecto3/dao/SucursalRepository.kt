@@ -7,4 +7,5 @@ import java.util.*
 
 interface SucursalRepository: JpaRepository<Sucursal, Long> {
     fun findByNombreSucursal(nombreSucursal:String): Optional<Sucursal>
-}//mar
+
+}
