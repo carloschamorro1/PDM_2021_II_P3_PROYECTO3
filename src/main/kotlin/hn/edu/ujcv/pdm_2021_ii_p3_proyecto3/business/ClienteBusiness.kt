@@ -41,6 +41,7 @@ class ClienteBusiness:IClienteBusiness {
         }
         return opt.get()
     }
+
     @Throws(BusinessException::class)
     override fun saveCliente(cliente: Cliente): Cliente {
         try{
@@ -73,7 +74,6 @@ class ClienteBusiness:IClienteBusiness {
                 throw BusinessException(e.message)
             }
         }
-
     }
     @Throws(BusinessException::class, NotFoundException::class)
     override fun getClienteByNombre(nombreCliente: String): Cliente {
