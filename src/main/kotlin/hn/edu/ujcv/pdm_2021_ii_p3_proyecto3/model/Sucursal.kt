@@ -4,7 +4,7 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
-class Sucursal( nombreSucursal:String ="", val direccionSucursal:String="", val telefonoSucursal:Long=0,
+class Sucursal( val nombreSucursal:String ="", val direccionSucursal:String="", val telefonoSucursal:Long=0,
 val emailSucursal:String="") {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
