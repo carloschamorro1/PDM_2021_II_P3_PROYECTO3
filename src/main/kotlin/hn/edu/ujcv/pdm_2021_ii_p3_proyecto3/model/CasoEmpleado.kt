@@ -11,7 +11,7 @@ class CasoEmpleado (val idEmpleado:Long=0, val idCaso:Long=0, val fechaInicioTra
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var idCasoEmpleado:Long=0
-}
+}//
 /*
 [idCasoEmpleado] [numeric](18, 0) NOT NULL,
 	[idEmpleado] [numeric](18, 0) NOT NULL,

@@ -7,3 +7,4 @@ import java.util.*
 interface CasoEmpleadoRepository: JpaRepository<CasoEmpleado, Long> {
     fun findByIdCasoEmpleado(idCasoEmpleado:Long): Optional<CasoEmpleado>
 }
+//

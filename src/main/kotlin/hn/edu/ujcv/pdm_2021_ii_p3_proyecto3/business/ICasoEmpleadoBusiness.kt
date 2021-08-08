@@ -9,4 +9,4 @@ interface ICasoEmpleadoBusiness {
     fun saveCasoEmpleado(casoEmpleado: CasoEmpleado): CasoEmpleado
     fun removeCasoEmpleado(idCasoEmpleado:Long)
     fun updateCasoEmpleado(casoEmpleado: CasoEmpleado):CasoEmpleado
-}
+}//
